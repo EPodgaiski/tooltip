@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gorik: toolTip</title>
+  <!--[if IE 9]><meta http-equiv="X-UA-Compatible" content="IE=9"><![endif]-->
+  <!--[if IE 8]><meta http-equiv="X-UA-Compatible" content="IE=8"><![endif]-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="format-detection" content="telephone=no">
+  <link href="css/styles.css" rel="stylesheet">
+  <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" type="text/css"><![endif]-->
+  <!--[if lte IE 8]><link rel="stylesheet" href="css/ie.css" type="text/css"><script src="js/html5shiv.js"></script><![endif]-->
+</head>
+<body>
+
+<div class="main" id="top">
+
+  <header>
+    <div class="wrapper clearfix">
+      <a href="http://egor-podgayskiy.moikrug.ru/" rel="nofollow" class="profile"><i class="icon"></i>Мой Круг</a>
+      <a href="http://www.linkedin.com/pub/egor-podgaiski/5b/9ba/977/en" rel="nofollow" class="profile"><i class="icon"></i>LinkedIn</a>
+      <a href="http://gorik.name" title="домашняя страница Горика" class="logo">I Am...</a>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="wrapper">
+
+      <h1>Gorik: jQuery toolTip</h1>
+
+      <section>
+        <h2>Описание:</h2>
+
+        <p>Скрипт, в виде jQuery плагина, для показа простых дизайнерских подсказок на странице.</p>
+      </section>
+
+      <section>
+        <h2>Примеры</h2>
+
+        <div class="example">
+          <div class="title">Обычный вариант</div>
+        </div>
+
+        <div class="example">
+          <div class="title">Disabled</div>
+        </div>
+
+        <div class="example">
+          <div class="title">C фиксированным текстом</div>
+        </div>
+
+        <div class="example">
+          <div class="title">C фиксированным текстом</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Подключение:</h2>
+
+        <ul>
+          <li>Подключаем библиотеку jQuery 1.10.0+</li>
+          <li>Подключаем плагин <a href="js/tool.tip.js">tool.tip.js</a></li>
+          <li>Подключаем скрипт для нужного нам элемента:<br>
+  <pre>
+    $('document').ready(function(){
+       $('.js_this_tooltip').toolTip();
+    });
+  </pre>
+          </li>
+          <li>Прописываем стили для .tooltip (есть в примере в <a href="css/styles.css">css/styles.css</a>).</li>
+        </ul>
+        <p class="gray">* Я не особо люблю инлайнить стили скриптом, посему все стили прописаны ручками в css (выделено /*THIS CSS*/)</p>
+      </section>
+
+      <section>
+        <h2>Параметры:</h2>
+
+        <p><b>interval</b> - интервал перед затуханием.</p>
+        <p><b>duration</b> - длительность затухания.</p>
+        <p><b>left</b> - смещение по горизонтали относительно центра элемента.</p>
+        <p><b>top</b> - смещение по вертикали относительно верха элемента.</p>
+        <p><b>content</b> - jq объект содержащий контент для тултипа.</p>
+        <p><b>action</b> - альтернативный вызов тултипа ("","click").</p>
+      </section>
+
+      <section>
+        <h2>Ресурсы:</h2>
+
+        <p>Файл JS <a href="js/tool.tip.js">tool.tip.js</a></p>
+        <p>Файл CSS <a href="css/styles.css">styles.css</a></p>
+      </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrapper clearfix">
+
+      <div class="creater">Creater: <a href="http://www.gorik.name/" target="_blank">I am ...</a></div>
+      <div class="copy">&copy; This is footer</div>
+
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/jquery-1.10.0.min.js"></script>
+<script src="js/tool.tip.js"></script>
+<script>
+  $('document').ready(function(){
+    $('.js_this_tooltip').toolTip();
+  });
+</script>
+
+<script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16569331-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

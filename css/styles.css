@@ -1,0 +1,159 @@
+﻿/* I am
+******************************/
+html, body{height:100%; width:100%;}
+body{margin:0; padding:0; background-color:#fff; color:#333; font:14px /1.2 Tahoma, Geneva, sans-serif;}
+
+a{outline:none; cursor:pointer; text-decoration:none; color:blue;
+	-moz-transition:color, border-bottom-color;
+	-o-transition:color, border-bottom-color;
+	-webkit-transition:color, border-bottom-color;
+	transition:color, border-bottom-color;
+}
+@media only screen and (min-width:1004px){
+	a:hover, .footer a:hover{color:orange;
+		-moz-transition-duration:.08s;
+		-o-transition-duration:.08s;
+		-webkit-transition-duration:.08s;
+		transition-duration:.08s;
+	}
+}
+	a img{border:none;}
+
+:focus{outline:none;}
+
+h1, h2, h3, h4, p, form, input, table, tr, td, th, ul, li{margin:0; padding:0; font-weight:normal;}
+header, section, footer, aside, nav, article, figure{display:block;}
+table, tr, td{border:0; border-collapse:collapse; vertical-align:top; text-align:left;}
+sup{position:relative; bottom:1.2ex; font-size:.7em; line-height:1; vertical-align:baseline;}
+
+.text_input, textarea, select, .select{position:relative; background-color:#fff; border:1px solid #0097e6; border-radius:5px; vertical-align:top; color:#474745; font:13px Arial, Helvetica, sans-serif;
+
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.text_input{padding:0 10px; height:34px;}
+	.text_input:focus, textarea:focus{}
+	.input .text_input{width:100%;}
+
+textarea{padding:5px 10px; resize:vertical;}
+
+/*THIS CSS*/
+select, .select{height:34px; padding:5px 5px 5px 10px; vertical-align:baseline; cursor:pointer;}
+.select{display:inline-block; padding-right:25px;
+	background:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#f1f1f1));
+	background:-webkit-linear-gradient(#fff 0%, #f1f1f1 100%);
+	background:-moz-linear-gradient(#fff 0%, #f1f1f1 100%);
+	background:-o-linear-gradient(#fff 0%, #f1f1f1 100%);
+	background:linear-gradient(#fff 0%, #f1f1f1 100%);
+}
+	.select select{opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; margin:0;}
+	.select_val{display:block; font-size:14px; line-height:22px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+		.select_val:before{content:attr(data-label); color:#646263;}
+		.select_val:after{content:''; display:block; position:absolute; right:10px; top:50%; margin-top:-1px; border-top:4px solid; border-left:4px solid transparent; border-right:4px solid transparent;}
+
+	.select.disabled{border-color:#d4d4d4; color:#646263;}
+
+@media only screen and (min-width:1004px){
+	.select:hover{border-color:#0097e6;}
+	.select:hover .select_val:after{border-top-color:#0097e6;}
+	.select.disabled:hover{border-color:#d4d4d4; color:#646263;}
+	.select.disabled:hover .select_val:after{border-top-color:#646263;}
+}
+/*THIS CSS EOF*/
+
+::-webkit-input-placeholder{color:#989795;}
+:-moz-placeholder{color:#989795 !important;}
+::-moz-placeholder{color:#989795 !important;}
+:-ms-input-placeholder{color:#989795;}
+.placeholder{color:#989795 !important;}
+
+ul{list-style:none;}
+
+	p + p{padding-top:12px;}
+
+/* Base
+******************************/
+.hide{display:none !important;}
+.float_l{float:left;}
+.float_r{float:right;}
+.row{overflow:hidden;}
+.clear{clear:both !important; font-size:0 !important;}
+.clearfix:after{content:''; clear:both; display:block;}
+.nodecor, .spec_decor{text-decoration:none; border-bottom:none;}
+.nowrap{white-space:nowrap;}
+.bold{font-weight:bold;}
+
+.dotted{border-bottom:1px dotted;}
+
+.text_left{text-align:left;}
+.text_right{text-align:right;}
+.text_center{text-align:center;}
+
+.black{color:#333;}
+.white{color:#FFF;}
+.red, .binding{color:red !important;}
+.green{color:green;}
+.orange{color:#ff7e00;}
+.blue{color:blue;}
+.gray{color:#999;}
+
+.img_box{overflow:hidden; position:relative; font-size:0;}
+	.img_box img{max-width:100%; max-height:100%; margin:auto; font-size:11px; color:#999;}
+
+
+/* Main
+******************************/
+.main{min-width:780px; max-width:1110px; min-height:100%; position:relative; margin:0 auto; background-color:#fdfdfd; 
+	-webkit-box-shadow:0 0 6px RGBA(0,0,0,.15);
+	box-shadow:0 0 6px RGBA(0,0,0,.15);
+}
+	.wrapper{max-width:990px; margin:0 5%;}
+
+
+/* header
+******************************/
+header{padding:10px; font:16px Georgia,'Times New Roman',Times,serif;}
+	header .wrapper{padding-bottom:25px; border-bottom:1px solid #e6e6e6;}
+	header a{color:black; text-shadow:1px 1px rgba(255,255,255,.7);}
+
+.logo{font-style:italic; text-shadow:1px 1px rgba(255,255,255,.7);}
+.profile{float:right; margin-left:10px; padding-left:12px;}
+	.profile .icon{position:relative; display:inline-block; width:10px; height:10px; border:1px solid; border-radius:50%; margin:0 2px 0 -12px;
+		-webkit-font-smoothing: subpixel-antialiased !important;
+		-webkit-backface-visibility:hidden;
+		-moz-backface-visibility:hidden;
+		-ms-backface-visibility:hidden;
+	}
+		.profile .icon:before{content:''; position:absolute; display:block; width:0; height:0; left:2px; top:3px; border:1px solid;
+			-webkit-box-shadow:4px 0;
+			box-shadow:4px 0;
+		}
+		.profile .icon:after{content:''; position:absolute; display:block; bottom:2px; left:2px; width:6px; height:5px; border-radius:50%; border-style:solid; border-width:0 0 1px 0;}
+
+
+/* Content
+******************************/
+.content{padding:40px 0 100px; line-height:1.4;}
+
+h1, .alt_h1{padding-bottom:15px; font-size:20px; line-height:24px;}
+h2{padding:10px 0; color:black; font-size:16px; line-height:1.2;}
+
+	section + section{margin-top:20px;}
+
+.content li{padding:3px 0 2px 15px;}
+	.content li:before{content:''; display:block; width:4px; height:4px; position:absolute; margin:9px 0 0 -12px; background-color:orange;}
+	.content pre{margin:10px 0 8px;}
+
+.example + .example{margin-top:15px;}
+	.example .title{padding-bottom:5px;}
+	.example .select + .select{margin-left:7px;}
+
+
+/* Footer
+******************************/
+footer{position:absolute; bottom:0; left:0; height:70px; width:100%;}
+	footer .wrapper{padding-top:25px; overflow:hidden; border-top:1px solid #e6e6e6; color:gray;}
+	footer a{color:gray;}
+	.creater{float:right; margin-right:10px;}

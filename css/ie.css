@@ -1,0 +1,11 @@
+a:hover, .footer a:hover{color:orange;}
+
+.select select{filter:alpha(opacity=0);}
+	.select:hover{border-color:#0097e6;}
+	.select:hover .select_val:after{border-top-color:#0097e6;}
+	.select.disabled:hover{border-color:#d4d4d4; color:#646263;}
+	.select.disabled:hover .select_val:after{border-top-color:#646263;}
+
+.main{outline:2px solid #bebebe;}
+
+.popup_mask{filter:alpha(opacity=75);}
