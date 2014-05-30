@@ -40,19 +40,34 @@
 
         <div class="example">
           <div class="title">Обычный вариант</div>
+            <span class="orange js_this_tooltip"><span class="tooltip_text">Подсказка с текстом</span>Текст с подсказкой.</span>
         </div>
 
         <div class="example">
-          <div class="title">Disabled</div>
+          <div class="title">Вариант с картинкой</div>
+          <span class="orange js_this_tooltip"><span class="tooltip_text">Картинка для текста</span>Текст для картинки</span>
         </div>
 
         <div class="example">
-          <div class="title">C фиксированным текстом</div>
+          <div class="title">Контент в другом блоке (удобно когда один и тот же текст показывается на куче элементов)</div>
+          <span class="orange js_id_tooltip">Здесь</span> подсказка такая же как и <span class="orange js_id_tooltip">здесь</span>.
+          <div class="hide" id="js_tt_text">
+            <div class="custom row">
+              <div class="half">Одна подсказка для всех</div>
+              <div class="half">Одна подсказка для всех</div>
+            </div>
+          </div>
         </div>
 
         <div class="example">
-          <div class="title">C фиксированным текстом</div>
+          <div class="title">Тултип по клику</div>
+            <span class="orange js_click_tooltip"><span class="tooltip_text">Подсказка с текстом</span>Текст с подсказкой.</span>
         </div>
+
+<!--         <div class="example">
+          <div class="title">Контент в атрибуте</div>
+          <span class="gray js_attr_tooltip" data-tooltip-text="Подсказка 1">текст один</span>, <span class="orange js_attr_tooltip" data-tooltip-text="Подсказка 2">текст два.</span>
+        </div> -->
       </section>
 
       <section>
@@ -76,12 +91,12 @@
       <section>
         <h2>Параметры:</h2>
 
-        <p><b>interval</b> - интервал перед затуханием.</p>
-        <p><b>duration</b> - длительность затухания.</p>
-        <p><b>left</b> - смещение по горизонтали относительно центра элемента.</p>
-        <p><b>top</b> - смещение по вертикали относительно верха элемента.</p>
-        <p><b>content</b> - jq объект содержащий контент для тултипа.</p>
-        <p><b>action</b> - альтернативный вызов тултипа ("","click").</p>
+        <p><b>interval</b> - интервал в ms перед затуханием подсказки. Возможные значения от: 0. Значение по умолчанию: 200;</p>
+        <p><b>duration</b> - длительность в ms эфекта затухания. Возможные значения от: 0. Значение по умолчанию: 200;</p>
+        <p><b>left</b> - смещение в px по горизонтали относительно центра элемента.</p>
+        <p><b>top</b> - смещение в px по вертикали относительно верха элемента.</p>
+        <p><b>content</b> - jQuery объект содержащий контент для тултипа.</p>
+        <p><b>action</b> - альтернативный event для вызова тултипа Возможные значения: любой тригер для элемента. Нарпимер: "click", "change", "my_event";</p>
       </section>
 
       <section>
@@ -109,7 +124,27 @@
 <script src="js/tool.tip.js"></script>
 <script>
   $('document').ready(function(){
-    $('.js_this_tooltip').toolTip();
+
+    $('.js_this_tooltip').toolTip({
+      top:-14
+    });
+
+    $('.js_id_tooltip').toolTip({
+      top:-14,
+      content: $('#js_tt_text')
+    });
+
+    $('.js_click_tooltip').toolTip({
+      top:-14,
+      action: 'click',
+      interval:1000
+    });
+
+    // $('.js_attr_tooltip').toolTip({
+    //   top:-14,
+    //   content: $(this).attr('data-tooltip-text')
+    // });
+
   });
 </script>
 

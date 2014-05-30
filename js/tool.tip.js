@@ -7,26 +7,21 @@
 // I Am ...
 //******************************
 (function($){
-    $.fn.toolTip = function(args){
+    $.fn.toolTip = function(options){
 
         var settings = $.extend({
-            interval : 200, // интервал перед затуханием
+            interval : 500, // интервал перед затуханием
             duration : 400, // длительность затухания
             left : 0, //смещение по горизонтали относительно центра элемента
             top : 0, // смещение по вертикали относительно верха элемента
             content : '', // jq объект содержащий контент для тултипа
             action : '' // альтернативный вызов тултипа ("","click")
-        }, args);
+        }, options);
 
         return this.each(function(){
 
             var el = $(this),
-                tooltip = null;
-                interval = settings.interval,
-                duration = settings.duration,
-                ttLeft = settings.left,
-                ttTop = settings.top,
-                content = settings.content,
+                tooltip = {};
                 action = settings.action;
 
             document.toolTipTimeout = 0;
@@ -49,8 +44,7 @@
 
             if (action != ''){
                 el.on({
-                    click: function(event)
-                    {
+                    click: function(event){
                         var el = $(this),
                             elOffset = el.offset(),
                             tooltipTop = 0,
@@ -61,8 +55,8 @@
 
                         defText = el.find(".tooltip_text");
 
-                        if (content.length && content != ''){
-                            tooltip.html($(content).html());
+                        if (settings.content.length && settings.content != ''){
+                            tooltip.html($(settings.content).html());
                         }
                         else if (defText.length && defText.html() != ''){
                             tooltip.html(defText.html());
@@ -75,14 +69,14 @@
                             return;
                         }
 
-                        tooltipTop = elOffset.top - tooltip.outerHeight() + ttTop;
-                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + ttLeft;
+                        tooltipTop = elOffset.top - tooltip.outerHeight() + settings.top;
+                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + settings.left;
 
                         tooltip.css({
                             "top": tooltipTop + "px",
                             "left": tooltipLeft + "px"
                         })
-                        .fadeIn(duration, function(){
+                        .fadeIn(settings.duration, function(){
                             el.trigger("show");
                         });
 
@@ -90,7 +84,8 @@
                             tooltip.fadeOut('fast', function(){
                                 el.trigger("hide");
                             });
-                        },interval);
+                            console.log(settings.interval);
+                        },settings.interval);
 
                     }
                 });
@@ -106,51 +101,56 @@
 
                         window.clearTimeout(document.toolTipTimeout);
 
+                        console.log('mouseenter');
+
                         if (tooltip.fadeInStarted)
                             return;
 
                         defText = el.find(".tooltip_text");
 
-                        if (content.length && content != ''){
-                            tooltip.html($(content).html());
+                        if (settings.content.length && settings.content != ''){
+                            tooltip.html(settings.content.html());
                         }
                         else if (defText.length && defText.html() != ''){
                             tooltip.html(defText.html());
                         }
 
-                        tooltipTop = elOffset.top - tooltip.outerHeight() + ttTop;
-                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + ttLeft;
+                        tooltipTop = elOffset.top - tooltip.outerHeight() + settings.top;
+                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + settings.left;
 
                         tooltip.fadeInStarted = true;
                         tooltip.css({
                             "top": tooltipTop,
                             "left": tooltipLeft
-                        }).fadeIn(duration, function(){
+                        }).fadeIn(settings.duration, function(){
                             tooltip.fadeInStarted = false;
                         });
 
                         el.trigger("show");
                     },
                     mouseleave: function(){
+                        console.log('mouseleave');
                         document.toolTipTimeout = window.setTimeout(function(){
                             tooltip.fadeOut('fast', function(){
                                 el.trigger("hide");
                             });
-                        },interval);
+                        },settings.interval);
                     }
                 });
             }
 
             $("body").on("mouseenter", ".tooltip", function(){
+                console.log('ttmouseenter');
                 window.clearTimeout(document.toolTipTimeout);
             });
 
             $("body").on("mouseleave", ".tooltip", function(){
+                console.log('ttmouseleave');
                 document.toolTipTimeout = window.setTimeout(function(){
                     tooltip.fadeOut('fast', function(){
                         el.trigger("hide");
                     });
-                },interval);
+                },settings.interval);
             });
         });
     }
