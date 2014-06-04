@@ -1,5 +1,5 @@
 //******************************
-// Tooltip v:1.0, 2013, jQuery plugin
+// Tooltip v:0.1.a, 2013, jQuery plugin
 // Creater: Egor Podgaiski, http://gorik.name/
 // Dual licensed under the MIT and GPL licenses:
 // http://www.opensource.org/licenses/mit-license.php
@@ -14,14 +14,14 @@
             duration : 400, // длительность затухания
             left : 0, //смещение по горизонтали относительно центра элемента
             top : 0, // смещение по вертикали относительно верха элемента
-            content : '', // jq объект содержащий контент для тултипа
+            content : null, // jq объект содержащий контент для тултипа
             action : '' // альтернативный вызов тултипа ("","click")
         }, options);
 
         return this.each(function(){
 
             var el = $(this),
-                tooltip = {};
+                tooltip = null;
                 action = settings.action;
 
             document.toolTipTimeout = 0;
@@ -36,6 +36,7 @@
             }
             else{
                 tooltip = $('#toolTipBox');
+                tooltip.off(); /*TODO придумать способ добавлять одиножды event*/
             }
 
             if (!el.hasClass('this_tooltip')){
@@ -55,7 +56,7 @@
 
                         defText = el.find(".tooltip_text");
 
-                        if (settings.content.length && settings.content != ''){
+                        if (settings.content && settings.content != ''){
                             tooltip.html($(settings.content).html());
                         }
                         else if (defText.length && defText.html() != ''){
@@ -76,15 +77,10 @@
                             "top": tooltipTop + "px",
                             "left": tooltipLeft + "px"
                         })
-                        .fadeIn(settings.duration, function(){
-                            el.trigger("show");
-                        });
+                        .fadeIn(settings.duration);
 
                         document.toolTipTimeout = window.setTimeout(function(){
-                            tooltip.fadeOut('fast', function(){
-                                el.trigger("hide");
-                            });
-                            console.log(settings.interval);
+                            tooltip.fadeOut('fast');
                         },settings.interval);
 
                     }
@@ -95,20 +91,17 @@
                     mouseenter: function(event){
                         var el = $(this),
                             elOffset = el.offset(),
-                            tooltipTop = 0,
-                            tooltipLeft = 0
+                            tooltipTop = '',
+                            tooltipLeft = '',
                             defText = '';
 
                         window.clearTimeout(document.toolTipTimeout);
 
-                        console.log('mouseenter');
-
-                        if (tooltip.fadeInStarted)
-                            return;
+                        if (tooltip.fadeInStarted) return;
 
                         defText = el.find(".tooltip_text");
 
-                        if (settings.content.length && settings.content != ''){
+                        if (settings.content && settings.content.html() != ''){
                             tooltip.html(settings.content.html());
                         }
                         else if (defText.length && defText.html() != ''){
@@ -126,30 +119,22 @@
                             tooltip.fadeInStarted = false;
                         });
 
-                        el.trigger("show");
                     },
                     mouseleave: function(){
-                        console.log('mouseleave');
                         document.toolTipTimeout = window.setTimeout(function(){
-                            tooltip.fadeOut('fast', function(){
-                                el.trigger("hide");
-                            });
+                            tooltip.fadeOut('fast');
                         },settings.interval);
                     }
                 });
             }
 
-            $("body").on("mouseenter", ".tooltip", function(){
-                console.log('ttmouseenter');
+            tooltip.on("mouseenter", function(event){
                 window.clearTimeout(document.toolTipTimeout);
             });
 
-            $("body").on("mouseleave", ".tooltip", function(){
-                console.log('ttmouseleave');
+            tooltip.on("mouseleave", function(event){
                 document.toolTipTimeout = window.setTimeout(function(){
-                    tooltip.fadeOut('fast', function(){
-                        el.trigger("hide");
-                    });
+                    $('#toolTipBox').fadeOut('fast');
                 },settings.interval);
             });
         });
