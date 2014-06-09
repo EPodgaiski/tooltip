@@ -88,7 +88,7 @@ ul{list-style:none;}
 
 /* Main
 ******************************/
-.main{min-width:780px; max-width:1110px; min-height:100%; position:relative; margin:0 auto; background-color:#fdfdfd; 
+.main{min-width:320px; max-width:1110px; min-height:100%; position:relative; margin:0 auto; background-color:#fdfdfd; 
 	-webkit-box-shadow:0 0 6px RGBA(0,0,0,.15);
 	box-shadow:0 0 6px RGBA(0,0,0,.15);
 }
@@ -97,7 +97,7 @@ ul{list-style:none;}
 
 /* header
 ******************************/
-header{padding:10px; font:16px Georgia,'Times New Roman',Times,serif;}
+header{padding:10px 0; font:16px Georgia,'Times New Roman',Times,serif;}
 	header .wrapper{padding-bottom:25px; border-bottom:1px solid #e6e6e6;}
 	header a{color:black; text-shadow:1px 1px rgba(255,255,255,.7);}
 
@@ -158,3 +158,11 @@ footer{position:absolute; bottom:0; left:0; height:70px; width:100%;}
 	.tooltip_text{display:none !important;}
 
 /*THIS CSS EOF*/
+
+
+/*Responce
+******************************/
+@media only screen and (max-width:767px){
+	h1{padding-bottom:15px; font-size:1.5em;}
+	pre{font-size:10px;}
+}
