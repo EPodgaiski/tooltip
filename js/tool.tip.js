@@ -11,18 +11,27 @@
 
         var settings = $.extend({
             interval : 500, // интервал перед затуханием
+            ttLeaveInterval : 500, // интервал перед затуханием после увода мыши с подсказки
             duration : 400, // длительность затухания
             left : 0, //смещение по горизонтали относительно центра элемента
             top : 0, // смещение по вертикали относительно верха элемента
             content : null, // jq объект содержащий контент для тултипа
-            action : '' // альтернативный вызов тултипа ("","click")
+            action : '', // альтернативный вызов тултипа ("","click")
+            styleClass : '' // свой класс для изменения вида тултипа
         }, options);
 
         return this.each(function(){
 
             var el = $(this),
-                tooltip = null;
-                action = settings.action;
+                tooltip = null,
+                interval = settings.interval,
+                ttLeaveInterval = settings.ttLeaveInterval,
+                duration = settings.duration,
+                top = settings.top,
+                left = settings.left,
+                content = settings.content,
+                action = settings.action,
+                styleClass = settings.styleClass;
 
             document.toolTipTimeout = 0;
 
@@ -36,7 +45,7 @@
             }
             else{
                 tooltip = $('#toolTipBox');
-                tooltip.off(); /*TODO придумать способ добавлять одиножды event*/
+                tooltip.off(); //TODO: придумать способ добавлять одиножды event
             }
 
             if (!el.hasClass('this_tooltip')){
@@ -56,8 +65,8 @@
 
                         defText = el.find(".tooltip_text");
 
-                        if (settings.content && settings.content != ''){
-                            tooltip.html($(settings.content).html());
+                        if (content &&  content != ''){
+                            tooltip.html($(content).html());
                         }
                         else if (defText.length && defText.html() != ''){
                             tooltip.html(defText.html());
@@ -70,18 +79,20 @@
                             return;
                         }
 
-                        tooltipTop = elOffset.top - tooltip.outerHeight() + settings.top;
-                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + settings.left;
+                        tooltipTop = elOffset.top - tooltip.outerHeight() + top;
+                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + left;
 
-                        tooltip.css({
+                        tooltip.addClass(styleClass).css({
                             "top": tooltipTop + "px",
                             "left": tooltipLeft + "px"
                         })
-                        .fadeIn(settings.duration);
+                        .fadeIn(duration);
 
                         document.toolTipTimeout = window.setTimeout(function(){
-                            tooltip.fadeOut('fast');
-                        },settings.interval);
+                            tooltip.fadeOut('fast', function(){
+                                tooltip.removeClass(styleClass);
+                            });
+                        },interval);
 
                     }
                 });
@@ -101,21 +112,21 @@
 
                         defText = el.find(".tooltip_text");
 
-                        if (settings.content && settings.content.html() != ''){
-                            tooltip.html(settings.content.html());
+                        if (content && content.html() != ''){
+                            tooltip.html(content.html());
                         }
                         else if (defText.length && defText.html() != ''){
                             tooltip.html(defText.html());
                         }
 
-                        tooltipTop = elOffset.top - tooltip.outerHeight() + settings.top;
-                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + settings.left;
+                        tooltipTop = elOffset.top - tooltip.outerHeight() + top;
+                        tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + left;
 
                         tooltip.fadeInStarted = true;
-                        tooltip.css({
+                        tooltip.addClass(styleClass).css({
                             "top": tooltipTop,
                             "left": tooltipLeft
-                        }).fadeIn(settings.duration, function(){
+                        }).fadeIn(duration, function(){
                             tooltip.fadeInStarted = false;
                         });
 
@@ -123,7 +134,8 @@
                     mouseleave: function(){
                         document.toolTipTimeout = window.setTimeout(function(){
                             tooltip.fadeOut('fast');
-                        },settings.interval);
+                            tooltip.removeClass(styleClass);
+                        },interval);
                     }
                 });
             }
@@ -134,8 +146,10 @@
 
             tooltip.on("mouseleave", function(event){
                 document.toolTipTimeout = window.setTimeout(function(){
-                    $('#toolTipBox').fadeOut('fast');
-                },settings.interval);
+                    $('#toolTipBox').fadeOut('fast', function(){
+                        $('#toolTipBox').attr('class', 'tooltip');/*TODO*/
+                    });
+                },ttLeaveInterval);
             });
         });
     }
