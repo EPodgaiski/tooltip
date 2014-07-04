@@ -16,6 +16,7 @@
             left : 0, //смещение по горизонтали относительно центра элемента
             top : 0, // смещение по вертикали относительно верха элемента
             content : null, // jq объект содержащий контент для тултипа
+            contentFunc : function(){return false}, // функция, возвращающая контент для тултипа
             action : '', // альтернативный вызов тултипа ("","click")
             styleClass : '' // свой класс для изменения вида тултипа
         }, options);
@@ -30,8 +31,15 @@
                 top = settings.top,
                 left = settings.left,
                 content = settings.content,
+                contentFunc = settings.contentFunc.apply(el),
                 action = settings.action,
-                styleClass = settings.styleClass;
+                styleClass = settings.styleClass,
+                contentFunc;
+
+            if (contentFunc){
+                el.data('content', contentFunc);
+            }
+
 
             document.toolTipTimeout = 0;
 
@@ -65,7 +73,10 @@
 
                         defText = el.find(".tooltip_text");
 
-                        if (content &&  content != ''){
+                        if(el.data('content')){
+                            tooltip.html(el.data('content'));
+                        }
+                        else if (content && content.html != ''){
                             tooltip.html($(content).html());
                         }
                         else if (defText.length && defText.html() != ''){
@@ -112,11 +123,21 @@
 
                         defText = el.find(".tooltip_text");
 
-                        if (content && content.html() != ''){
-                            tooltip.html(content.html());
+                        if(el.data('content')){
+                            tooltip.html(el.data('content'));
+                        }
+                        else if (content && content.html != ''){
+                            tooltip.html($(content).html());
                         }
                         else if (defText.length && defText.html() != ''){
                             tooltip.html(defText.html());
+                        }
+                        else{
+                            if(tooltip.is(':visible')){
+                                tooltip.hide();
+                                tooltip.html('');
+                            }
+                            return;
                         }
 
                         tooltipTop = elOffset.top - tooltip.outerHeight() + top;
