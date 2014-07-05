@@ -61,8 +61,7 @@
             }
 
             if (action != ''){
-                el.on({
-                    click: function(event){
+                el.on(action, function(event){
                         var el = $(this),
                             elOffset = el.offset(),
                             tooltipTop = 0,
@@ -90,10 +89,12 @@
                             return;
                         }
 
+                        tooltip.addClass(styleClass);
+
                         tooltipTop = elOffset.top - tooltip.outerHeight() + top;
                         tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + left;
 
-                        tooltip.addClass(styleClass).css({
+                        tooltip.css({
                             "top": tooltipTop + "px",
                             "left": tooltipLeft + "px"
                         })
@@ -101,11 +102,9 @@
 
                         document.toolTipTimeout = window.setTimeout(function(){
                             tooltip.fadeOut('fast', function(){
-                                tooltip.removeClass(styleClass);
+                                tooltip.attr('class', 'tooltip');
                             });
                         },interval);
-
-                    }
                 });
             }
             else{
@@ -140,11 +139,13 @@
                             return;
                         }
 
+                        tooltip.addClass(styleClass);
+
                         tooltipTop = elOffset.top - tooltip.outerHeight() + top;
                         tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + left;
 
                         tooltip.fadeInStarted = true;
-                        tooltip.addClass(styleClass).css({
+                        tooltip.css({
                             "top": tooltipTop,
                             "left": tooltipLeft
                         }).fadeIn(duration, function(){
@@ -155,7 +156,7 @@
                     mouseleave: function(){
                         document.toolTipTimeout = window.setTimeout(function(){
                             tooltip.fadeOut('fast');
-                            tooltip.removeClass(styleClass);
+                            tooltip.attr('class', 'tooltip');
                         },interval);
                     }
                 });
