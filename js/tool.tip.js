@@ -56,7 +56,7 @@
                 tooltip.off(); //TODO: придумать способ добавлять одиножды event
             }
 
-            if (!el.hasClass('this_tooltip')){
+            if (!el.hasClass('this_tooltip')){f
                 el.addClass('this_tooltip')
             }
 
@@ -94,11 +94,14 @@
                         tooltipTop = elOffset.top - tooltip.outerHeight() + top;
                         tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + left;
 
+                        tooltip.prop('fadeInStarted',true);
                         tooltip.css({
                             "top": tooltipTop + "px",
                             "left": tooltipLeft + "px"
                         })
-                        .fadeIn(duration);
+                        .fadeIn(duration, function(){
+                            tooltip.prop('fadeInStarted',false);
+                        });
 
                         document.toolTipTimeout = window.setTimeout(function(){
                             tooltip.fadeOut('fast', function(){
@@ -118,7 +121,7 @@
 
                         window.clearTimeout(document.toolTipTimeout);
 
-                        if (tooltip.fadeInStarted) return;
+                        if (tooltip.prop('fadeInStarted')) return;
 
                         defText = el.find(".tooltip_text");
 
@@ -144,12 +147,12 @@
                         tooltipTop = elOffset.top - tooltip.outerHeight() + top;
                         tooltipLeft = elOffset.left + (el.outerWidth())/2 - (tooltip.outerWidth()/2) + left;
 
-                        tooltip.fadeInStarted = true;
+                        tooltip.prop('fadeInStarted',true);
                         tooltip.css({
                             "top": tooltipTop,
                             "left": tooltipLeft
                         }).fadeIn(duration, function(){
-                            tooltip.fadeInStarted = false;
+                            tooltip.prop('fadeInStarted',false);
                         });
 
                     },
