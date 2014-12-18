@@ -70,10 +70,11 @@
             <span class="orange js_click_tooltip"><span class="tooltip_text">Подсказка с текстом</span>Текст с подсказкой.</span>
         </div>
 
-<!--         <div class="example">
+        <div class="example">
           <div class="title">Контент в атрибуте</div>
-          <span class="gray js_attr_tooltip" data-tooltip-text="Подсказка 1">текст один</span>, <span class="orange js_attr_tooltip" data-tooltip-text="Подсказка 2">текст два.</span>
-        </div> -->
+          <span class="gray js_attr_tooltip" data-tooltip-text="Подсказка 1">текст один</span><span class="tooltip_text">Подсказка 1</span>, <span class="orange js_attr_tooltip" data-tooltip-text="Подсказка 2">текст два.</span><span class="tooltip_text">Подсказка 2</span>
+        </div>
+
       </section>
 
       <section>
@@ -102,6 +103,7 @@
         <p><b>left</b> - смещение в px по горизонтали относительно центра элемента.</p>
         <p><b>top</b> - смещение в px по вертикали относительно верха элемента.</p>
         <p><b>content</b> - jQuery объект содержащий контент для тултипа.</p>
+        <p><b>contentFunc</b> - функция относительно (this), возвращающая контент для тултипа. Нарпимер: function(){return $(this).closest('li').find('.tooltip_text').html();}</p>
         <p><b>action</b> - альтернативный event для вызова тултипа Возможные значения: любой тригер для элемента. Нарпимер: "click", "change", "my_event";</p>
       </section>
 
@@ -143,13 +145,13 @@
     $('.js_click_tooltip').toolTip({
       top:-14,
       action: 'click',
-      interval:1000
+      interval:2000
     });
 
-    // $('.js_attr_tooltip').toolTip({
-    //   top:-14,
-    //   content: $(this).attr('data-tooltip-text')
-    // });
+    $('.js_attr_tooltip').toolTip({
+      top:-14,
+      contentFunc: function(){return $(this).attr('data-tooltip-text');}
+    });
 
   });
 </script>

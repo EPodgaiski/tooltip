@@ -25,4 +25,6 @@ $('document').ready(function(){
 
 **content** - jQuery объект содержащий контент для тултипа;
 
+**contentFunc** - функция относительно (this), возвращающая контент для тултипа. Нарпимер: function(){return $(this).closest('li').find('.tooltip_text').html();};
+
 **action** - альтернативный event для вызова тултипа Возможные значения: любой тригер для элемента. Нарпимер: _"click"_, _"change"_, _"my_event"_;

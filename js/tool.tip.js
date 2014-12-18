@@ -56,7 +56,7 @@
                 tooltip.off(); //TODO: придумать способ добавлять одиножды event
             }
 
-            if (!el.hasClass('this_tooltip')){f
+            if (!el.hasClass('this_tooltip')){
                 el.addClass('this_tooltip')
             }
 
